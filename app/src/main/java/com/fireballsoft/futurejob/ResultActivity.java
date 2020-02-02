@@ -4,35 +4,34 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import java.util.Random;
+    public class ResultActivity extends Activity {
 
-public class ResultActivity extends Activity {
+        private TextView txtRst;
+        private String name;
+        private String major;
 
-    private TextView txtRst;
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.result_activity);
 
-    private String name;
+            txtRst = findViewById(R.id.txtRst);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.result_activity);
+            name = getIntent().getStringExtra("name");
+            major = getIntent().getStringExtra("major");
+            int jobHash = (name+major).hashCode();
+            setResult(jobHash+"");
+        }
+        private String[] JOB = {"거지", "고철 수집가", "심마니", "인력거꾼", "암표상", "셔터맨"};
 
-        txtRst = findViewById(R.id.txtRst);
+        public void setResult(String hashCode) {
 
-        name = getIntent().getStringExtra("name");
+            //Random rand = new Random();
+            //int val = rand.nextInt(JOB.length);
+            int val = Integer.parseInt(hashCode)%JOB.length;
+            txtRst.setText(name + "\n" + JOB[val]);
+        }
 
-        setResult();
+
+
     }
-
-    private String[] JOB = {"거지", "고철 수집가", "심마니", "인력거꾼", "암표상", "셔터맨"};
-
-    private void setResult() {
-        Random rand = new Random();
-        int val = rand.nextInt(JOB.length);
-
-        txtRst.setText(name + "\n" + JOB[val]);
-    }
-
-
-
-}
