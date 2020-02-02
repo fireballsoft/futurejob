@@ -26,10 +26,8 @@ import android.widget.TextView;
 
         public void setResult(String hashCode) {
 
-            //Random rand = new Random();
-            //int val = rand.nextInt(JOB.length);
-            int val = Integer.parseInt(hashCode)%JOB.length;
-            txtRst.setText(name + "\n" + JOB[val]);
+            int val = Math.abs(Integer.parseInt(hashCode))%JOB.length;
+            txtRst.setText(name + "\n" +"당신은 전생에"+ "\n"+ JOB[val]);
         }
 
 
